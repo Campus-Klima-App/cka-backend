@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 
-app.use((request, response, next) => {
-    response.status(200).json({
-        message: 'It works!'
-    });
-});
+const productRoutes = require('./api/routes/devices');
+const queryRoutes = require('./api/routes/query');
+
+app.use('/devices', productRoutes);
+app.use('/query', queryRoutes);
 
 module.exports = app;
