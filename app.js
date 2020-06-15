@@ -18,7 +18,7 @@ app.use((request, respone, next) => {
 });
 
 app.use((error, request, response, next) => {
-    response.status(err.status || 500);
+    response.status(error.status || 500);
     response.json({
         message: error.message
     })
