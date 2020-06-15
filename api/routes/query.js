@@ -24,10 +24,19 @@ router.get('/:device_id', (request, response, next) => {
 
 router.post('/:device_id', (request, response, next) => {
     const id = request.params.device_id;
+    const query = {
+        device_id: request.body.device_id,
+        raw: request.body.raw,
+        time: request.body.time,
+        field1: request.body.field1,
+        field2: request.body.field2
+    };
+
     if(id){
         response.status(201).json({
             id: id,
-            message: 'Created device entries ' + id
+            message: 'Created device entries ' + id,
+            query: query
         });
     } else {
         response.status(400).json({
