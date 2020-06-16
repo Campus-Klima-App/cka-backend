@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const Query = require('../models/query');
 
 router.get('/', (request, response, next) => {
     response.status(201).json({
@@ -24,15 +27,21 @@ router.get('/:device_id', (request, response, next) => {
 
 router.post('/:device_id', (request, response, next) => {
     const id = request.params.device_id;
-    const query = {
-        device_id: request.body.device_id,
-        raw: request.body.raw,
-        time: request.body.time,
-        field1: request.body.field1,
-        field2: request.body.field2
-    };
+    const query = new Query ({
+        _id: new mongoose.Types.ObjectId(),
+        _device_id: request.body.device_id,
+        _raw: request.body.raw,
+        _time: request.body.time,
+        _field1: request.body.field1,
+        _field2: request.body.field2
+    });
 
     if(id){
+        query.save().then(result => {
+            console.log(result);
+        })
+        .catch(error => console.log(error));
+
         response.status(201).json({
             id: id,
             message: 'Created device entries ' + id,

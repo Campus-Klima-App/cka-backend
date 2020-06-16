@@ -105,3 +105,6 @@ dist
 
 # MacOS search files
 *.DS_Store
+
+# Config files
+nodemon.json

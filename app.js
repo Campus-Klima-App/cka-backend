@@ -2,11 +2,22 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/devices');
 const queryRoutes = require('./api/routes/query');
-const { request, response } = require('express');
+//const { request, response } = require('express');
 
+mongoose.connect(
+    'mongodb+srv://' +
+    process.env.MONGO_ATLAS_USER + ':' +
+    process.env.MONGO_ATLAS_PW +
+    '@campus-climate-db-qsbnr.mongodb.net/campus-climate-db?retryWrites=true&w=majority',
+    { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+     }
+    )
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
