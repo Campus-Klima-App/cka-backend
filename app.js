@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/devices');
-const queryRoutes = require('./api/routes/query');
+const datapointRoutes = require('./api/routes/datapoint');
 //const { request, response } = require('express');
 
 mongoose.connect(
@@ -33,7 +33,7 @@ app.use((request, response, next) => {
 });
 
 app.use('/devices', productRoutes);
-app.use('/query', queryRoutes);
+app.use('/datapoint', datapointRoutes);
 
 app.use((request, respone, next) => {
     const error = new Error('Not found');

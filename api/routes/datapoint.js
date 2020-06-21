@@ -2,24 +2,26 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Query = require('../models/query');
+const Datapoint = require('../models/Datapoint');
 
 router.get('/', (request, response, next) => {
     response.status(201).json({
-        message: 'Handling GET requests to /query with all devices'
+        message: 'Handling GET requests to /datapoint with all devices'
     })
 })
 
 router.get('/:device_id', (request, response, next) => {
-    const id = request.params.device_id;
-    if(id){
+    const device_id = request.params.device_id;
+    const datapoint = Datapoint.find({_device_id: device_id})
+    if(datapoint){
         response.status(201).json({
-            id: id,
-            message: 'This is the response data for the id ' + id
+            id: device_id,
+            datapoint: datapoint,
+            message: 'This is the datapoint for the device-id ' + device_id
         });
     } else {
         response.status(400).json({
-            id:id,
+            id:device_id,
             message: 'A invalid id was requested'
         })
     }
@@ -27,7 +29,7 @@ router.get('/:device_id', (request, response, next) => {
 
 router.post('/:device_id', (request, response, next) => {
     const id = request.params.device_id;
-    const query = new Query ({
+    const datapoint = new Datapoint ({
         _id: new mongoose.Types.ObjectId(),
         _device_id: request.body.device_id,
         _raw: request.body.raw,
@@ -37,7 +39,7 @@ router.post('/:device_id', (request, response, next) => {
     });
 
     if(id){
-        query.save().then(result => {
+        datapoint.save().then(result => {
             console.log(result);
         })
         .catch(error => console.log(error));
@@ -45,7 +47,7 @@ router.post('/:device_id', (request, response, next) => {
         response.status(201).json({
             id: id,
             message: 'Created device entries ' + id,
-            query: query
+            datapoint: datapoint
         });
     } else {
         response.status(400).json({
