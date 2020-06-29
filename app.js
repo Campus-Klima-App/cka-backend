@@ -4,8 +4,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const productRoutes = require("./api/routes/devices");
-const datapointRoutes = require("./api/routes/datapoint");
+const deviceRoutes = require("./api/routes/devices");
+const datapointRoutes = require("./api/routes/datapoints");
 //const { request, response } = require('express');
 
 mongoose.connect(
@@ -36,8 +36,8 @@ app.use((request, response, next) => {
   next();
 });
 
-app.use("/devices", productRoutes);
-app.use("/datapoint", datapointRoutes);
+app.use("/devices", deviceRoutes);
+app.use("/datapoints", datapointRoutes);
 
 app.use((request, respone, next) => {
   const error = new Error("Not found");

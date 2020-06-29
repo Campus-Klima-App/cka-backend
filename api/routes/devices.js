@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/", (request, response, next) => {
   response.status(200).json({
-    message: "Handling GET requests to /products",
+    message: "Handling GET requests to /datapoints",
   });
 });
 
