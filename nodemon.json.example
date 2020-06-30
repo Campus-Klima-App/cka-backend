@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MONGO_ATLAS_USER": "mongodb-readwrite-user",
+    "MONGO_ATLAS_PW": "mongodb-secret-password",
+    "URL": "http://example.com",
+    "PORT": "1337"
+  }
+}
