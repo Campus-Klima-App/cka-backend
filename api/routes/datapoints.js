@@ -6,10 +6,36 @@ const Datapoint = require("../models/datapoint");
 
 router.get("/", (request, response, next) => {
   Datapoint.find()
+    .select("_id device_id raw time field1 field2")
     .exec()
     .then((documents) => {
       console.log(documents);
-      response.status(200).json(documents);
+
+      const res = {
+        count: documents.length,
+        datapoints: documents.map((document) => {
+          return {
+            id: document.id,
+            device_id: document.device_id,
+            raw: document.raw,
+            time: document.time,
+            field1: document.field1,
+            field2: document.field2,
+            request: {
+              type: "GET",
+              url:
+                process.env.URL ||
+                "http://localhost" +
+                  ":" +
+                  process.env.PORT +
+                  "/datapoints/" +
+                  document.id,
+            },
+          };
+        }),
+      };
+
+      response.status(200).json(res);
     })
     .catch((error) => {
       console.log(error);
@@ -47,9 +73,6 @@ router.post("/", (request, response, next) => {
     field1: request.body.field1,
     field2: request.body.field2,
   });
-
-  console.log("--------");
-  console.log("Datapoint: " + datapoint);
 
   datapoint
     .save()
