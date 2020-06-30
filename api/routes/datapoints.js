@@ -16,11 +16,13 @@ router.get("/", (request, response, next) => {
         datapoints: documents.map((document) => {
           return {
             id: document.id,
+            battery: document.battery,
             device_id: document.device_id,
+            event: document.event,
+            light: document.light,
             raw: document.raw,
+            temperature: document.temperature,
             time: document.time,
-            field1: document.field1,
-            field2: document.field2,
             request: {
               type: "GET",
               url: generateDatapointURL(document),
@@ -49,11 +51,13 @@ router.get("/:device_id", (request, response) => {
         datapoints: documents.map((document) => {
           return {
             id: document.id,
+            battery: document.battery,
             device_id: document.device_id,
+            event: document.event,
+            light: document.light,
             raw: document.raw,
+            temperature: document.temperature,
             time: document.time,
-            field1: document.field1,
-            field2: document.field2,
             request: {
               type: "GET",
               url: generateDatapointURL(document),
@@ -74,11 +78,12 @@ router.post("/", (request, response, next) => {
   const id = request.body.device_id;
   const datapoint = new Datapoint({
     _id: new mongoose.Types.ObjectId(),
+    battery: request.body.battery,
     device_id: request.body.device_id,
+    event: request.body.event,
     raw: request.body.raw,
+    temperature: request.body.temperature,
     time: request.body.time,
-    field1: request.body.field1,
-    field2: request.body.field2,
   });
 
   datapoint
