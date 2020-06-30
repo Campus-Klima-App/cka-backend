@@ -39,28 +39,30 @@ router.get("/", (request, response, next) => {
 
 router.get("/:device_id", (request, response) => {
   const id = request.params.device_id;
-  Datapoint.findById(id)
+  Datapoint.find({ device_id: id })
     .exec()
-    .then((document) => {
-      console.log(document);
-      if (document) {
-        return {
-          id: document.id,
-          device_id: document.device_id,
-          raw: document.raw,
-          time: document.time,
-          field1: document.field1,
-          field2: document.field2,
-          request: {
-            type: "GET",
-            url: generateDatapointURL(document),
-          },
-        };
-      } else {
-        return response
-          .status(404)
-          .json({ message: "No valid entry found for id " + id });
-      }
+    .then((documents) => {
+      console.log(documents);
+
+      const res = {
+        count: documents.length,
+        datapoints: documents.map((document) => {
+          return {
+            id: document.id,
+            device_id: document.device_id,
+            raw: document.raw,
+            time: document.time,
+            field1: document.field1,
+            field2: document.field2,
+            request: {
+              type: "GET",
+              url: generateDatapointURL(document),
+            },
+          };
+        }),
+      };
+
+      response.status(200).json(res);
     })
     .catch((error) => {
       console.log(error);
