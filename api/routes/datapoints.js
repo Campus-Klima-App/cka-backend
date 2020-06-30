@@ -23,13 +23,7 @@ router.get("/", (request, response, next) => {
             field2: document.field2,
             request: {
               type: "GET",
-              url:
-                process.env.URL ||
-                "http://localhost" +
-                  ":" +
-                  process.env.PORT +
-                  "/datapoints/" +
-                  document.id,
+              url:generateDatapointURL(document),
             },
           };
         }),
@@ -81,7 +75,11 @@ router.post("/", (request, response, next) => {
       response.status(201).json({
         id: id,
         message: "Created device entries " + id,
-        datapoint: datapoint,
+        result: result,
+        request: {
+          type: "GET",
+          url: generateDatapointURL(document),
+        },
       });
     })
     .catch((error) => {
@@ -91,3 +89,12 @@ router.post("/", (request, response, next) => {
 });
 
 module.exports = router;
+
+const generateDatapointURL = (document) => {
+  return process.env.URL ||
+  "http://localhost" +
+    ":" +
+    process.env.PORT +
+    "/datapoints/" +
+    document.id
+}
