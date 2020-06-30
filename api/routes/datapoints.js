@@ -44,7 +44,18 @@ router.get("/:device_id", (request, response) => {
     .then((document) => {
       console.log(document);
       if (document) {
-        return response.status(201).json({ document });
+        return {
+          id: document.id,
+          device_id: document.device_id,
+          raw: document.raw,
+          time: document.time,
+          field1: document.field1,
+          field2: document.field2,
+          request: {
+            type: "GET",
+            url: generateDatapointURL(document),
+          },
+        };
       } else {
         return response
           .status(404)
@@ -78,7 +89,7 @@ router.post("/", (request, response, next) => {
         result: result,
         request: {
           type: "GET",
-          url: generateDatapointURL(document),
+          url: generateDatapointURL(result),
         },
       });
     })
