@@ -23,7 +23,7 @@ router.get("/", (request, response, next) => {
             field2: document.field2,
             request: {
               type: "GET",
-              url:generateDatapointURL(document),
+              url: generateDatapointURL(document),
             },
           };
         }),
@@ -102,10 +102,7 @@ router.post("/", (request, response, next) => {
 module.exports = router;
 
 const generateDatapointURL = (document) => {
-  return process.env.URL ||
-  "http://localhost" +
-    ":" +
-    process.env.PORT +
-    "/datapoints/" +
-    document.id
-}
+  const url = process.env.URL || "http://localhost";
+  const port = process.env.PORT || 3000;
+  return url + ":" + port + "/datapoints/" + document.id;
+};
