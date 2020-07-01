@@ -1,5 +1,7 @@
 # Campus Klima App Backend
 
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/campusklimaapp/cka-backend)
+
 This is the backend server of the "Campus-Klima-App", created during a semester project 2020.
 It receives HTTP POST requests and saves them to a mongo-database.
 Furthermore it exposes the data via a simple REST-API.
@@ -15,13 +17,27 @@ docker build -t campus-klima-app .
 The docker image can be executed with
 
 ```bash
-docker run -it \
+docker run -d \
   -e MONGO_ATLAS_USER='<your-mongodb-user' \
-  -e MONGO_ATLAS_PW='your-mongodb-password' \
+  -e MONGO_ATLAS_PW='<your-mongodb-password>' \
   -e URL='http://localhost' \
   -e PORT='3000' \
   -p 3001:3000 \
-  campus-klima-app
+  campusklimaapp/cka-backend
+```
+
+To run in interactive mode replace `-d` (_detached mode_) with `-it` (_interactive terminal_).
+
+To show running containers execute
+
+```bash
+docker ps
+```
+
+To stop a container, kill it with the assiciated container name from above
+
+```bash
+docker kill <container-name>
 ```
 
 ## Documentation
