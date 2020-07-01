@@ -75,15 +75,15 @@ router.get("/:device_id", (request, response) => {
 });
 
 router.post("/", (request, response, next) => {
-  const id = request.body.device_id;
+  const id = request.body.dev_id;
   const datapoint = new Datapoint({
     _id: new mongoose.Types.ObjectId(),
-    battery: request.body.battery,
-    device_id: request.body.device_id,
-    event: request.body.event,
-    raw: request.body.raw,
-    temperature: request.body.temperature,
-    time: request.body.time,
+    battery: request.body.payload_fields.battery,
+    device_id: id,
+    event: request.body.payload_fields.event,
+    raw: request.body.payload_raw,
+    temperature: request.body.payload_fields.temperature,
+    time: request.body.metadata.time,
   });
 
   datapoint
@@ -91,7 +91,7 @@ router.post("/", (request, response, next) => {
     .then((result) => {
       console.log(result);
       response.status(201).json({
-        id: id,
+        device_id: id,
         message: "Created device entries " + id,
         result: result,
         request: {
