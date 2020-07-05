@@ -1,6 +1,7 @@
 FROM node:9-slim
 WORKDIR /app
-COPY package.json /app
-RUN npm install
-COPY . /app
+COPY package*.json ./
+RUN npm i
+COPY . .
+EXPOSE 3000
 CMD ["npm", "run", "deploy"]
