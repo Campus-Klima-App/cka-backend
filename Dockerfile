@@ -1,7 +1,8 @@
-FROM node:9-slim
-WORKDIR /app
-COPY package*.json ./
-RUN npm i
-COPY . .
+FROM node:12
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app/
+COPY package*.json /usr/src/app/
+RUN npm install
+COPY . /usr/src/app/
 EXPOSE 3000
-CMD ["npm", "run", "deploy"]
+CMD [ "node", "server.js" ]
