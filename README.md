@@ -1,6 +1,7 @@
 # Campus Klima App Backend
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/campusklimaapp/cka-backend)
+[![Heroku App Status](http://heroku-shields.herokuapp.com/cka-backend)](https://cka-backend.herokuapp.com)
 
 This is the backend server of the "Campus-Klima-App", created during a semester project 2020.
 It receives HTTP POST requests and saves them to a mongo-database.
