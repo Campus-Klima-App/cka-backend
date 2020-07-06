@@ -76,7 +76,7 @@ router.post("/", (request, response, next) => {
     light: request.body.payload_fields.light,
     raw: request.body.payload_raw,
     temperature: request.body.payload_fields.temperature,
-    time: request.body.metadata.gateways.time,
+    time: request.body.metadata.time,
   });
 
   datapoint
