@@ -23,10 +23,6 @@ router.get("/", (request, response, next) => {
             raw: document.raw,
             temperature: document.temperature,
             time: document.time,
-            request: {
-              type: "GET",
-              url: generateDatapointURL(document),
-            },
           };
         }),
       };
@@ -58,10 +54,6 @@ router.get("/:device_id", (request, response) => {
             raw: document.raw,
             temperature: document.temperature,
             time: document.time,
-            request: {
-              type: "GET",
-              url: generateDatapointURL(document),
-            },
           };
         }),
       };
@@ -95,10 +87,6 @@ router.post("/", (request, response, next) => {
         device_id: id,
         message: "Created device entries " + id,
         result: result,
-        request: {
-          type: "GET",
-          url: generateDatapointURL(result),
-        },
       });
     })
     .catch((error) => {
@@ -108,9 +96,3 @@ router.post("/", (request, response, next) => {
 });
 
 module.exports = router;
-
-const generateDatapointURL = (document) => {
-  const url = "http://localhost";
-  const port = 3000;
-  return url + ":" + port + "/datapoints/" + document.id;
-};

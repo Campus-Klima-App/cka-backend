@@ -21,11 +21,7 @@ mongoose
       useUnifiedTopology: true,
     }
   )
-  .then(
-    console.log(
-      "Connected to mongoDB"
-    )
-  );
+  .then(console.log("Connected to mongoDB"));
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
