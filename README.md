@@ -18,11 +18,10 @@ The docker image can be executed with
 
 ```bash
 docker run -d \
-  -e MONGO_ATLAS_USER='<your-mongodb-user' \
-  -e MONGO_ATLAS_PW='<your-mongodb-password>' \
-  -e URL='http://localhost' \
-  -e PORT='3000' \
-  -p 3001:3000 \
+  -e MONGO_USER='<your-mongodb-user' \
+  -e MONGO_PW='<your-mongodb-password>' \
+  -e MONGO_HOSTS='<your-mongodb-hosts>' \
+  -p 3000:3000 \
   campusklimaapp/cka-backend
 ```
 

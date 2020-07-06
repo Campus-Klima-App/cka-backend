@@ -8,17 +8,24 @@ const deviceRoutes = require("./api/routes/devices");
 const datapointRoutes = require("./api/routes/datapoints");
 //const { request, response } = require('express');
 
-mongoose.connect(
-  "mongodb+srv://" +
-    process.env.MONGO_ATLAS_USER +
-    ":" +
-    process.env.MONGO_ATLAS_PW +
-    "@campus-climate-db-qsbnr.mongodb.net/campus-climate-db?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(
+    "mongodb+srv://" +
+      process.env.MONGO_USER +
+      ":" +
+      process.env.MONGO_PW +
+      "@" +
+      process.env.MONGO_HOSTS,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(
+    console.log(
+      "Connected to mongoDB"
+    )
+  );
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

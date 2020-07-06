@@ -109,7 +109,7 @@ router.post("/", (request, response, next) => {
 module.exports = router;
 
 const generateDatapointURL = (document) => {
-  const url = process.env.URL || "http://localhost";
-  const port = process.env.PORT || 3000;
+  const url = "http://localhost";
+  const port = 3000;
   return url + ":" + port + "/datapoints/" + document.id;
 };
