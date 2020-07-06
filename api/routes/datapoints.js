@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const Datapoint = require("../models/datapoint");
+const Datapoint = require("../models/Datapoint");
 
 router.get("/", (request, response, next) => {
   Datapoint.find()
