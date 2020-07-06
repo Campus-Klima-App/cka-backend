@@ -2,6 +2,7 @@
   "env": {
     "MONGO_USER": "mongodb-readwrite-user",
     "MONGO_PW": "mongodb-secret-password",
-    "MONGO_HOSTS: "example.com"
+    "MONGO_HOST": "example.com",
+    "PORT": 3000
   }
 }
