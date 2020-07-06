@@ -81,9 +81,10 @@ router.post("/", (request, response, next) => {
     battery: request.body.payload_fields.battery,
     device_id: id,
     event: request.body.payload_fields.event,
+    light: request.body.payload_fields.light,
     raw: request.body.payload_raw,
     temperature: request.body.payload_fields.temperature,
-    time: request.body.metadata.time,
+    time: request.body.metadata.gateways.time,
   });
 
   datapoint
