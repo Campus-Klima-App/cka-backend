@@ -9,24 +9,8 @@ router.get("/", (request, response, next) => {
     .select("_id device_id raw time field1 field2")
     .exec()
     .then((documents) => {
-      console.log(documents);
-
-      const res = {
-        count: documents.length,
-        datapoints: documents.map((document) => {
-          return {
-            id: document.id,
-            battery: document.battery,
-            device_id: document.device_id,
-            event: document.event,
-            light: document.light,
-            raw: document.raw,
-            temperature: document.temperature,
-            time: document.time,
-          };
-        }),
-      };
-
+      console.log("Returning all datapoints.");
+      const res = ResponseFromDocuments(documents);
       response.status(200).json(res);
     })
     .catch((error) => {
@@ -35,29 +19,13 @@ router.get("/", (request, response, next) => {
     });
 });
 
-router.get("/:device_id", (request, response) => {
+router.get("/:device_id/:from?/:to?", (request, response) => {
   const id = request.params.device_id;
   Datapoint.find({ device_id: id })
     .exec()
     .then((documents) => {
-      console.log(documents);
-
-      const res = {
-        count: documents.length,
-        datapoints: documents.map((document) => {
-          return {
-            id: document.id,
-            battery: document.battery,
-            device_id: document.device_id,
-            event: document.event,
-            light: document.light,
-            raw: document.raw,
-            temperature: document.temperature,
-            time: document.time,
-          };
-        }),
-      };
-
+      console.log("Returning all datapoints for", id);
+      const res = ResponseFromDocuments(documents);
       response.status(200).json(res);
     })
     .catch((error) => {
@@ -94,5 +62,23 @@ router.post("/", (request, response, next) => {
       response.status(500).json({ error: error });
     });
 });
+
+const ResponseFromDocuments = (documents) => {
+  return {
+    count: documents.length,
+    datapoints: documents.map((document) => {
+      return {
+        id: document.id,
+        battery: document.battery,
+        device_id: document.device_id,
+        event: document.event,
+        light: document.light,
+        raw: document.raw,
+        temperature: document.temperature,
+        time: document.time,
+      };
+    }),
+  };
+}
 
 module.exports = router;
