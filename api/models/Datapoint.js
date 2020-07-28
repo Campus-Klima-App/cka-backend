@@ -8,7 +8,7 @@ const datapointSchema = mongoose.Schema({
   light: Number,
   raw: String,
   temperature: Number,
-  time: String,
+  time: Date,
 });
 
 module.exports = mongoose.model("Datapoint", datapointSchema);
