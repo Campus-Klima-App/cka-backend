@@ -3,10 +3,13 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Datapoint = require("../models/Datapoint");
+const defaultFields = "_id device_id light temperature time ";
+const allFields = defaultFields + "battery event raw field1 field2";
 
 router.get("/", (request, response, next) => {
+  const includeAllFields = request.header("include_all_fields");
   Datapoint.find()
-    .select("_id device_id raw time field1 field2")
+    .select(includeAllFields ? allFields : defaultFields)
     .exec()
     .then((documents) => {
       console.log("Returning all datapoints.");
@@ -19,9 +22,12 @@ router.get("/", (request, response, next) => {
     });
 });
 
-router.get("/:device_id/:from?/:to?", (request, response) => {
+router.get("/:device_id", (request, response) => {
   const id = request.params.device_id;
+  const includeAllFields = request.header("include_all_fields");
+
   Datapoint.find({ device_id: id })
+    .select(includeAllFields ? allFields : defaultFields)
     .exec()
     .then((documents) => {
       console.log("Returning all datapoints for", id);
@@ -79,6 +85,6 @@ const ResponseFromDocuments = (documents) => {
       };
     }),
   };
-}
+};
 
 module.exports = router;
