@@ -8,14 +8,13 @@ const allFields = defaultFields + "battery event raw field1 field2";
 
 router.get("/", (request, response, next) => {
   const includeAllFields = request.header("include_all_fields");
-
   const from = request.header("from");
   const to = request.header("to");
-  const timeFilter = TimeFilterGenerator(from, to);
 
-  Datapoint.find({
-    time: timeFilter,
-  })
+  let findFilter = {};
+  findFilter = TimeFilterGenerator(findFilter, from, to);
+
+  Datapoint.find(findFilter)
     .select(includeAllFields ? allFields : defaultFields)
     .exec()
     .then((documents) => {
@@ -32,15 +31,14 @@ router.get("/", (request, response, next) => {
 router.get("/:device_id", (request, response) => {
   const id = request.params.device_id;
   const includeAllFields = request.header("include_all_fields");
-
   const from = request.header("from");
   const to = request.header("to");
-  const timeFilter = TimeFilterGenerator(from, to);
 
-  Datapoint.find({
-    device_id: id,
-    time: timeFilter,
-  })
+  let findFilter = {};
+  findFilter.device_id = id;
+  findFilter = TimeFilterGenerator(findFilter, from, to);
+
+  Datapoint.find(findFilter)
     .select(includeAllFields ? allFields : defaultFields)
     .exec()
     .then((documents) => {
@@ -101,16 +99,20 @@ const ResponseFromDocuments = (documents) => {
   };
 };
 
-const TimeFilterGenerator = (from, to) => {
-  var time = {};
-  if (from) {
-    time.$gte = new Date(from);
+const TimeFilterGenerator = (filter, from, to) => {
+  if (from || to) {
+    filter.time = {};
+
+    if (from) {
+      filter.time.$gte = new Date(from);
+    }
+
+    if (to) {
+      filter.time.$lte = new Date(to);
+    }
   }
 
-  if (to) {
-    time.$lte = new Date(to);
-  }
-  return time;
+  return filter;
 };
 
 module.exports = router;
