@@ -8,6 +8,10 @@ const deviceRoutes = require("./api/routes/devices");
 const datapointRoutes = require("./api/routes/datapoints");
 //const { request, response } = require('express');
 
+// just to see the string structure
+// mongoose.connect('mongodb://username:password@host:port/database,
+// mongodb://username:password@host:port,mongodb:
+// username:password@host:port' [, options]);
 mongoose
   .connect(
     "mongodb://" +
@@ -17,8 +21,8 @@ mongoose
       "@" +
       process.env.MONGO_HOSTS,
     {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      //useNewUrlParser: true,
+      //useUnifiedTopology: true,
     }
   )
   .then(console.log("Connected to mongoDB"));

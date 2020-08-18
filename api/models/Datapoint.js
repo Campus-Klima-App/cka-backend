@@ -11,4 +11,4 @@ const datapointSchema = mongoose.Schema({
   time: Date,
 });
 
-module.exports = mongoose.model("Datapoint", datapointSchema);
+module.exports = mongoose.model("datapoint", datapointSchema, "datapoint");
