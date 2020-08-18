@@ -10,7 +10,7 @@ const datapointRoutes = require("./api/routes/datapoints");
 
 mongoose
   .connect(
-    "mongodb+srv://" +
+    "mongodb://" +
       process.env.MONGO_USER +
       ":" +
       process.env.MONGO_PW +
