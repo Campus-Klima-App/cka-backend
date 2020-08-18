@@ -21,8 +21,8 @@ mongoose
       "@" +
       process.env.MONGO_HOSTS,
     {
-      //useNewUrlParser: true,
-      //useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     }
   )
   .then(console.log("Connected to mongoDB"));
