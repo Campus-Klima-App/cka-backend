@@ -23,10 +23,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    }.catch((error) => {
-      console.error('App starting error:', error.stack);
-      process.exit(1);
-    })
+    }
   )
   .then(console.log("Connected to mongoDB"));
 app.use(morgan("dev"));
