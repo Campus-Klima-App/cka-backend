@@ -47,7 +47,7 @@ app.use("/devices", deviceRoutes);
 app.use("/datapoints", datapointRoutes);
 
 var proxy = require('express-http-proxy');
-app.use('/proxy', proxy('0.0.0.0:26026'));
+app.use('/proxy', proxy('https://10.50.50.205:26026'));
 
 app.use('/',(request, response, next) => {
   const error = new Error("Not found");
