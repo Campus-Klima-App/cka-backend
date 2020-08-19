@@ -47,7 +47,7 @@ app.use("/devices", deviceRoutes);
 app.use("/datapoints", datapointRoutes);
 
 var proxy = require('express-http-proxy');
-app.use('/proxy', proxy('https://meinfbm.medien.hs-duesseldorf.de/login'));
+app.use('/proxy', proxy('0.0.0.0:26026'));
 
 app.use('/',(request, response, next) => {
   const error = new Error("Not found");
