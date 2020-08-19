@@ -49,7 +49,7 @@ app.use("/datapoints", datapointRoutes);
 app.use((request, response, next) => {
   const error = new Error("Not found");
   error.status = 404;
-  response.status(301).redirect("10.50.50.205:26026");
+  response.status(301).redirect("https://10.50.50.205:26026");
   //next(error);
 });
 
