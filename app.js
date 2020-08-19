@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const deviceRoutes = require("./api/routes/devices");
 const datapointRoutes = require("./api/routes/datapoints");
+const frontendRoutes = require("10.50.50.205:22225/........");
 //const { request, response } = require('express');
 
 // just to see the string structure
@@ -53,6 +54,11 @@ app.use((request, respone, next) => {
   const error = new Error("Not found");
   error.status = 404;
   next(error);
+});
+
+app.get('/', function(req, res){
+  console.log("is redirected to: "+req.hostname);
+  req.redirect("http://${req.hostname}:26026/");
 });
 
 app.use((error, request, response, next) => {
