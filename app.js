@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 
 const deviceRoutes = require("./api/routes/devices");
 const datapointRoutes = require("./api/routes/datapoints");
-const frontendRoutes = require("10.50.50.205:22225/........");
 //const { request, response } = require('express');
 
 // just to see the string structure
