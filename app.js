@@ -46,17 +46,12 @@ app.use((request, response, next) => {
 app.use("/devices", deviceRoutes);
 app.use("/datapoints", datapointRoutes);
 
-app.use((request, respone, next) => {
-  request.redirect("http://${req.hostname}:26026/");
-  //const error = new Error("Not found");
-  //error.status = 404;
+app.use((request, response, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  response.status(301).redirect("10.50.50.205:26026");
   //next(error);
 });
-
-/*app.get('/', function(req, res){
-  console.log("is redirected to: "+req.hostname);
-  req.redirect("http://${req.hostname}:26026/");
-});*/
 
 app.use((error, request, response, next) => {
   response.status(error.status || 500);
