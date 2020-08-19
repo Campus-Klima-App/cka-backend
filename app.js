@@ -46,11 +46,16 @@ app.use((request, response, next) => {
 app.use("/devices", deviceRoutes);
 app.use("/datapoints", datapointRoutes);
 
-app.use((request, response, next) => {
+var proxy = require('express-http-proxy');
+app.use('/proxy', proxy('https://meinfbm.medien.hs-duesseldorf.de/login'));
+
+app.use('/',(request, response, next) => {
   const error = new Error("Not found");
   error.status = 404;
-  response.status(301).redirect("https://${req.hostname}:26026");
-  //next(error);
+  //request("https://${req.hostname}:26026").pipe(res);
+  //response.status(301).redirect("https://${req.hostname}:26026");
+  //response.status(301).redirect("https://www.google.de");
+  next(error);
 });
 
 app.use((error, request, response, next) => {
