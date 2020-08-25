@@ -46,17 +46,14 @@ app.use((request, response, next) => {
 app.use("/devices", deviceRoutes);
 app.use("/datapoints", datapointRoutes);
 
-var proxy = require('express-http-proxy');
-app.use('/proxy', proxy('https://10.50.50.205:26026'));
+/*app.use('/',(request, response, next) => {
+  //const error = new Error("Not found");
+  //error.status = 404;
+  //next(error);
+});*/
 
-app.use('/',(request, response, next) => {
-  const error = new Error("Not found");
-  error.status = 404;
-  //request("https://${req.hostname}:26026").pipe(res);
-  //response.status(301).redirect("https://${req.hostname}:26026");
-  //response.status(301).redirect("https://www.google.de");
-  next(error);
-});
+
+
 
 app.use((error, request, response, next) => {
   response.status(error.status || 500);
