@@ -60,6 +60,8 @@ router.post("/", (request, response, next) => {
     device_id: id,
     event: request.body.payload_fields.event,
     light: request.body.payload_fields.light,
+    co: request.body.payload_fields.co,
+    humidity: request.body.payload_fields.humidity,
     raw: request.body.payload_raw,
     temperature: request.body.payload_fields.temperature,
     time: request.body.metadata.time,
