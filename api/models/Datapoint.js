@@ -6,6 +6,8 @@ const datapointSchema = mongoose.Schema({
   device_id: String,
   event: String,
   light: Number,
+  co: Number,
+  humidity: Number,
   raw: String,
   temperature: Number,
   time: Date,

@@ -3,8 +3,6 @@ const app = require("./app");
 
 const port = process.env.PORT || 3000;
 
-//const server = http.createServer(app);
-
 var express  = require('express');
 var httpProxy = require('http-proxy');
 var apiProxy = httpProxy.createProxyServer();
