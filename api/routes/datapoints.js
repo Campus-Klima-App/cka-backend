@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Datapoint = require("../models/Datapoint");
-const defaultFields = "_id device_id light temperature time ";
+const defaultFields = "_id device_id light temperature co humidity time ";
 const allFields = defaultFields + "battery event raw field1 field2";
 
 router.get("/", (request, response, next) => {
