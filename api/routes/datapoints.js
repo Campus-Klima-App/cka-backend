@@ -92,6 +92,8 @@ const ResponseFromDocuments = (documents) => {
         battery: document.battery,
         device_id: document.device_id,
         event: document.event,
+        co: document.co,
+        humidity: document.humidity,
         light: document.light,
         raw: document.raw,
         temperature: document.temperature,
